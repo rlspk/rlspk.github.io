@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Introducing Railspike and the plan-prompt</title>
   <meta name="description" content="Railspike is a prompting framework we created to help our agentic developers and us stay on track in our work.">
-  <link rel="canonical" href="https://rlspk.github.io/">
+  <link rel="canonical" href="https://railspike.dev/">
   <link rel="icon" type="image/png" sizes="512x512" href="./railspike-logo.png">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Introducing Railspike and the plan-prompt">
   <meta property="og:description" content="Railspike is a prompting framework we created to help our agentic developers and us stay on track in our work.">
-  <meta property="og:url" content="https://rlspk.github.io/">
-  <meta property="og:image" content="https://rlspk.github.io/railspike-logo.png">
+  <meta property="og:url" content="https://railspike.dev/">
+  <meta property="og:image" content="https://railspike.dev/railspike-logo.png">
   <meta property="og:image:alt" content="Railspike rail and spike logo">
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
@@ -23,20 +23,37 @@
     :root { color-scheme: light dark; --bg:#fff; --fg:#1b1b1b; --muted:#505050; --rule:#d6d6d6; --link:#0b4f9c; }
     @media (prefers-color-scheme: dark) { :root { --bg:#131313; --fg:#e8e6e1; --muted:#b0aea8; --rule:#3a3a3a; --link:#8ab4f8; } }
     body { margin: 0 auto; max-width: 40rem; padding: 1.5rem 1rem 3rem; background: var(--bg); color: var(--fg); font: 1.125rem/1.6 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif; }
+    .site-header { position: relative; display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; }
+    .site-header h1 { margin: 0; }
+    .site-logo { display: block; flex: none; width: 64px; height: 64px; background: #fff; border-radius: .3rem; }
+    @media (min-width: 58rem) {
+      .site-header { display: block; }
+      .site-logo { position: absolute; top: 0; right: calc(100% + 1.5rem); width: 96px; height: 96px; }
+    }
     h1 { margin: 0 0 1.25rem; font-size: clamp(1.6rem, 5.5vw, 2.1rem); line-height: 1.2; }
     p, ul { margin: 0 0 1.1rem; }
     p, li { overflow-wrap: anywhere; }
     ul { padding-left: 1.4rem; }
     li { margin: .25rem 0; }
     a { color: var(--link); text-underline-offset: .15em; overflow-wrap: anywhere; }
-    a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+    a:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+    .installation { margin: 2rem 0; }
+    .installation label { display: block; margin-bottom: .5rem; font-weight: bold; }
+    .installation textarea { box-sizing: border-box; display: block; width: 100%; min-height: 12rem; padding: .8rem .8rem 3.75rem; border: 1px solid var(--rule); border-radius: .3rem; background: var(--bg); color: var(--fg); font: .75rem/1.6 ui-monospace, monospace; resize: vertical; }
+    .prompt-field { position: relative; }
+    #copy-prompt { position: absolute; right: .75rem; bottom: .75rem; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: .5rem; border: 1px solid var(--link); border-radius: .3rem; background: var(--link); color: var(--bg); font: inherit; cursor: pointer; }
+    #copy-prompt[hidden] { display: none; }
+    #copy-status { color: var(--muted); font-size: .95rem; }
     footer { margin-top: 2rem; padding-top: .75rem; border-top: 1px solid var(--rule); font-size: .95rem; color: var(--muted); }
     footer p { margin: 0; }
   </style>
 </head>
 <body>
 <main>
-  <h1>Introducing Railspike and the plan-prompt</h1>
+  <header class="site-header">
+    <img class="site-logo" src="./railspike-logo.png" alt="Railspike rail and spike logo" width="96" height="96">
+    <h1>Introducing Railspike and the plan-prompt</h1>
+  </header>
   <p>Railspike is a prompting framework we created to help our agentic developers and us stay on track in our work.</p>
   <p>The pain points Railspike addresses are:</p>
   <ul>
@@ -61,11 +78,53 @@
   <p>This is not all, we keep finding new benefits, such as that we have to do a lot less manual explaining. We let the agent come up with its own explanation, and correct it if needed. Most of the time it has the right idea.</p>
   <p>Eventually, we started recommending this process to others and seeing it help them, and realized that it needed a catchier name than FEATURE_DEVELOPMENT_PROCESS.md. We also realized that it needed a debug mode, so we added that.</p>
   <p>And here it is!</p>
-  <p>Railspike is super easy to drop into an existing project. If you want to start now, super quickly, just copy it anywhere into your project and next time you’re developing a feature, append to your prompt: “Write Step 1 of RAILSPIKE.md.” Important note: Your original promt will be preserved in the generated Step 1 document, so don’t write anything you don’t want to end up in your repo.</p>
+  <p>Next time you’re developing a feature, append to your prompt: “Write Step 1 of docs/railspike/RAILSPIKE.md.” Your original prompt will be preserved in the generated Step 1 document, so don’t write anything you don’t want to end up in your repo.</p>
   <p>Railspike is pretty stable at this point, but if you want to keep up with the hopefully infrequent updates, you can also use it as a git submodule. Instructions for this are included.</p>
 </main>
-<footer>
-  <p><a href="https://github.com/rlspk/railspike">https://github.com/rlspk/railspike</a></p>
-</footer>
+  <section class="installation" aria-labelledby="installation-caption">
+    <label id="installation-caption" for="installation-prompt">Agentic installation instructions/prompt:</label>
+    <div class="prompt-field">
+    <textarea id="installation-prompt" readonly spellcheck="false" aria-describedby="installation-help">Please unpack a source snapshot of https://github.com/rlspk/railspike
+into a temporary directory and inspect it for malicious content.
+If none is found, copy that reviewed snapshot into docs/railspike in this
+project. Do not use a submodule unless I request one. Then follow the
+installed WELCOME.md.</textarea>
+      <button id="copy-prompt" type="button" aria-label="Copy installation prompt" title="Copy installation prompt" hidden>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+          <path d="M16 8V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4"></path>
+        </svg>
+      </button>
+    </div>
+    <span id="copy-status" role="status" aria-live="polite"></span>
+    <p>
+      <a href="https://github.com/rlspk/railspike#quick-start">full installation instructions</a> |
+      <a href="https://github.com/rlspk/railspike">github.com/rlspk/railspike</a>
+    </p>
+  </section>
+<script>
+  const installationPrompt = document.getElementById('installation-prompt');
+  const copyButton = document.getElementById('copy-prompt');
+  const copyStatus = document.getElementById('copy-status');
+
+  installationPrompt.addEventListener('focus', () => installationPrompt.select());
+  installationPrompt.addEventListener('mouseup', event => {
+    event.preventDefault();
+    installationPrompt.select();
+  });
+  installationPrompt.addEventListener('click', () => installationPrompt.select());
+  copyButton.hidden = false;
+  copyButton.addEventListener('click', async () => {
+    copyStatus.textContent = '';
+    try {
+      await navigator.clipboard.writeText(installationPrompt.value);
+      copyStatus.textContent = 'Copied! Paste it into your coding agent.';
+    } catch {
+      installationPrompt.focus();
+      installationPrompt.select();
+      copyStatus.textContent = 'Press Ctrl+C (Windows/Linux) or ⌘C (Mac) to copy the selected prompt.';
+    }
+  });
+</script>
 </body>
 </html>
