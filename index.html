@@ -23,6 +23,13 @@
     :root { color-scheme: light dark; --bg:#fff; --fg:#1b1b1b; --muted:#505050; --rule:#d6d6d6; --link:#0b4f9c; }
     @media (prefers-color-scheme: dark) { :root { --bg:#131313; --fg:#e8e6e1; --muted:#b0aea8; --rule:#3a3a3a; --link:#8ab4f8; } }
     body { margin: 0 auto; max-width: 40rem; padding: 1.5rem 1rem 3rem; background: var(--bg); color: var(--fg); font: 1.125rem/1.6 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif; }
+    .site-header { position: relative; display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; }
+    .site-header h1 { margin: 0; }
+    .site-logo { display: block; flex: none; width: 64px; height: 64px; background: #fff; border-radius: .3rem; }
+    @media (min-width: 58rem) {
+      .site-header { display: block; }
+      .site-logo { position: absolute; top: 0; right: calc(100% + 1.5rem); width: 96px; height: 96px; }
+    }
     h1 { margin: 0 0 1.25rem; font-size: clamp(1.6rem, 5.5vw, 2.1rem); line-height: 1.2; }
     p, ul { margin: 0 0 1.1rem; }
     p, li { overflow-wrap: anywhere; }
@@ -43,7 +50,10 @@
 </head>
 <body>
 <main>
-  <h1>Introducing Railspike and the plan-prompt</h1>
+  <header class="site-header">
+    <img class="site-logo" src="./railspike-logo.png" alt="Railspike rail and spike logo" width="96" height="96">
+    <h1>Introducing Railspike and the plan-prompt</h1>
+  </header>
   <p>Railspike is a prompting framework we created to help our agentic developers and us stay on track in our work.</p>
   <p>The pain points Railspike addresses are:</p>
   <ul>
