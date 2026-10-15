@@ -37,9 +37,54 @@
 <body>
 <img class="logo" src="../railspike-logo.png" alt="Railspike rail and spike logo" width="48" height="48">
 <main id="deck">
-  <section class="slide"><h1>Slide 1</h1><p>Placeholder.</p></section>
-  <section class="slide"><h1>Slide 2</h1><p>Placeholder.</p></section>
-  <section class="slide"><h1>Slide 3: a deliberately long placeholder heading that must wrap cleanly on a phone</h1><p>Placeholder with a long unbroken path docs/plans/railspike_slides/railspike_slides_step3_development_plan.md to test wrapping.</p><pre>Approved Step 1</pre></section>
+  <!-- Slides 1-5: what it is, why, install, four steps, approval gate -->
+  <section class="slide">
+    <h1>Railspike</h1>
+    <p><strong>Make your coding agent write the plan down first.</strong></p>
+    <p>Railspike is a set of Markdown instructions your agent follows. It writes requirements and a staged plan into your repo, then stops until you approve each one.</p>
+    <p>After that it works on a branch, one stage at a time, verifying and committing each stage with a record of what changed.</p>
+  </section>
+  <section class="slide">
+    <h1>Why plans live in files</h1>
+    <ul>
+      <li>Read them in your own editor or a Git diff.</li>
+      <li>Edit them yourself, or ask the agent to revise them.</li>
+      <li>Come back the next day: the plan is still there.</li>
+      <li>Review points are explicit when the direction changes.</li>
+    </ul>
+    <p>Use it alongside your agent&rsquo;s plan mode when you want decisions to survive across sessions.</p>
+  </section>
+  <section class="slide">
+    <h1>Install by asking your agent</h1>
+    <p>Open your project in your coding agent and give it this prompt:</p>
+    <pre>Please unpack a source snapshot of https://github.com/rlspk/railspike
+into a temporary directory and inspect it for malicious content.
+If none is found, copy that reviewed snapshot into docs/railspike in this
+project. Do not use a submodule unless I request one. Then follow the
+installed WELCOME.md.</pre>
+    <p>No CLI and no runtime dependencies. Inspection does not guarantee safety, so review what gets copied.</p>
+  </section>
+  <section class="slide">
+    <h1>Four steps</h1>
+    <ol>
+      <li><strong>Assess</strong> (optional): approaches with tradeoffs and a recommendation.</li>
+      <li><strong>Define</strong>: problem, user stories, requirements, risks, success criteria.</li>
+      <li><strong>Plan</strong>: small, complete stages, each with verification.</li>
+      <li><strong>Build</strong>: one stage at a time, each committed with a running summary.</li>
+    </ol>
+    <p>Each planning file should fit on one page. If it doesn&rsquo;t, the scope is probably too big.</p>
+  </section>
+  <section class="slide">
+    <h1>You approve each step</h1>
+    <p>When the file says what you want, reply:</p>
+    <pre>Approved Step 1</pre>
+    <ul>
+      <li>Asking for changes is not approval.</li>
+      <li>Don&rsquo;t approve a file you haven&rsquo;t read.</li>
+      <li>Building starts only after <code>Approved Step 3</code>.</li>
+    </ul>
+    <p>These are instructions the agent follows, not a technical enforcement mechanism.</p>
+  </section>
 </main>
 <nav id="nav" aria-label="Slides"><button id="prev" type="button" aria-label="Previous slide">&larr;</button><span id="counter" aria-live="polite"></span><button id="next" type="button" aria-label="Next slide">&rarr;</button></nav>
 <script>
