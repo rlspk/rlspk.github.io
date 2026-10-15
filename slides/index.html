@@ -37,53 +37,53 @@
 <body>
 <img class="logo" src="../railspike-logo.png" alt="Railspike rail and spike logo" width="48" height="48">
 <main id="deck">
-  <!-- Slides 1-5: what it is, why, install, four steps, approval gate -->
+  <!-- Slides 1-5: promise, why files, install, four steps, approval gate -->
   <section class="slide">
     <h1>Railspike</h1>
-    <p><strong>Make your coding agent write the plan down first.</strong></p>
-    <p>Railspike is a set of Markdown instructions your agent follows. It writes requirements and a staged plan into your repo, then stops until you approve each one.</p>
-    <p>After that it works on a branch, one stage at a time, verifying and committing each stage with a record of what changed.</p>
+    <p><strong>Your coding agent writes the plan first. Then it waits for you.</strong></p>
+    <p>In a few minutes you&rsquo;ll know how to make that happen, and exactly where you say yes.</p>
+    <p>Railspike is a set of Markdown instructions your agent follows. Requirements and a staged plan go into your repo. After you approve, it builds on a branch, one stage at a time, and commits each stage with a record of what changed.</p>
   </section>
   <section class="slide">
-    <h1>Why plans live in files</h1>
+    <h1>Plans belong in your repo, not in a chat</h1>
     <ul>
-      <li>Read them in your own editor or a Git diff.</li>
-      <li>Edit them yourself, or ask the agent to revise them.</li>
-      <li>Come back the next day: the plan is still there.</li>
-      <li>Review points are explicit when the direction changes.</li>
+      <li>A plan is a file. Read it in your own editor.</li>
+      <li>Change it yourself, or ask the agent to.</li>
+      <li>Tomorrow, it&rsquo;s still there.</li>
+      <li>You decide when the direction changes.</li>
     </ul>
-    <p>Use it alongside your agent&rsquo;s plan mode when you want decisions to survive across sessions.</p>
+    <p>Use it alongside your agent&rsquo;s plan mode when you want decisions to outlast the session.</p>
   </section>
   <section class="slide">
-    <h1>Install by asking your agent</h1>
-    <p>Open your project in your coding agent and give it this prompt:</p>
+    <h1>One prompt installs it</h1>
+    <p>Open your project in your coding agent and give it this:</p>
     <pre>Please unpack a source snapshot of https://github.com/rlspk/railspike
 into a temporary directory and inspect it for malicious content.
 If none is found, copy that reviewed snapshot into docs/railspike in this
 project. Do not use a submodule unless I request one. Then follow the
 installed WELCOME.md.</pre>
-    <p>No CLI and no runtime dependencies. Inspection does not guarantee safety, so review what gets copied.</p>
+    <p>No CLI. No runtime dependencies. Inspection is not a guarantee, so look at what lands in your project.</p>
   </section>
   <section class="slide">
-    <h1>Four steps</h1>
+    <h1>Four steps, and you approve each one</h1>
     <ol>
-      <li><strong>Assess</strong> (optional): approaches with tradeoffs and a recommendation.</li>
-      <li><strong>Define</strong>: problem, user stories, requirements, risks, success criteria.</li>
-      <li><strong>Plan</strong>: small, complete stages, each with verification.</li>
-      <li><strong>Build</strong>: one stage at a time, each committed with a running summary.</li>
+      <li><strong>Assess.</strong> Options, tradeoffs, a recommendation. Optional.</li>
+      <li><strong>Define.</strong> The problem, the requirements, the risks, what done means.</li>
+      <li><strong>Plan.</strong> Small, complete stages. Each one verified.</li>
+      <li><strong>Build.</strong> One stage at a time. Each one committed with a summary.</li>
     </ol>
-    <p>Each planning file should fit on one page. If it doesn&rsquo;t, the scope is probably too big.</p>
+    <p>Each planning file fits on one page. If it doesn&rsquo;t, the scope is probably too big.</p>
   </section>
   <section class="slide">
-    <h1>You approve each step</h1>
+    <h1>The agent stops until you say so</h1>
     <p>When the file says what you want, reply:</p>
     <pre>Approved Step 1</pre>
     <ul>
       <li>Asking for changes is not approval.</li>
-      <li>Don&rsquo;t approve a file you haven&rsquo;t read.</li>
+      <li>Don&rsquo;t approve what you haven&rsquo;t read.</li>
       <li>Building starts only after <code>Approved Step 3</code>.</li>
     </ul>
-    <p>These are instructions the agent follows, not a technical enforcement mechanism.</p>
+    <p>To be clear: these are instructions the agent follows. They are not a technical lock.</p>
   </section>
   <!-- Slides 6-10: worked exchange, shaping, stage commits, debug mode, next links -->
   <section class="slide">
