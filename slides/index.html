@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Railspike slides</title>
+  <style>
+    body { margin: 0; font: 1.25rem/1.5 ui-serif, Georgia, serif; }
+    .slide { padding: 2rem; }
+    .js .slide { display: none; min-height: 100vh; box-sizing: border-box; }
+    .js .slide.current { display: block; }
+    #counter { position: fixed; right: 1rem; bottom: .5rem; font: .9rem ui-monospace, monospace; }
+  </style>
+</head>
+<body>
+<main id="deck">
+  <section class="slide"><h1>Slide 1</h1><p>Placeholder.</p></section>
+  <section class="slide"><h1>Slide 2</h1><p>Placeholder.</p></section>
+  <section class="slide"><h1>Slide 3</h1><p>Placeholder.</p></section>
+</main>
+<div id="counter" aria-live="polite"></div>
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var counter = document.getElementById('counter');
+  var i = 0;
+  document.documentElement.className += ' js';
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) { s.className = 'slide' + (k === i ? ' current' : ''); });
+    counter.textContent = (i + 1) + ' / ' + slides.length;
+    try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
+  }
+  document.addEventListener('keydown', function (e) {
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') { show(i + 1); e.preventDefault(); }
+    else if (k === 'ArrowLeft' || k === 'PageUp') { show(i - 1); e.preventDefault(); }
+    else if (k === 'Home') { show(0); }
+    else if (k === 'End') { show(slides.length - 1); }
+  });
+  var x0 = null;
+  document.addEventListener('touchstart', function (e) { x0 = e.changedTouches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    x0 = null;
+    if (Math.abs(dx) > 40) show(dx < 0 ? i + 1 : i - 1);
+  }, { passive: true });
+  show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+})();
+</script>
+</body>
+</html>
