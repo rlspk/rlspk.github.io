@@ -85,6 +85,46 @@ installed WELCOME.md.</pre>
     </ul>
     <p>These are instructions the agent follows, not a technical enforcement mechanism.</p>
   </section>
+  <!-- Slides 6-10: worked exchange, shaping, stage commits, debug mode, next links -->
+  <section class="slide">
+    <h1>A worked exchange</h1>
+    <p><strong>You:</strong></p>
+    <pre>I want to export my saved searches as CSV. Write Step 1 of @railspike.</pre>
+    <p><strong>Agent:</strong> writes <code>docs/plans/&hellip;_step1_solution_assessment.md</code> with a few approaches, then waits.</p>
+    <p><strong>You:</strong> read it, then reply <code>Approved Step 1</code> or ask for changes.</p>
+    <p>For a change with an obvious approach, start at Step 2.</p>
+  </section>
+  <section class="slide">
+    <h1>You shape the plan</h1>
+    <p>The agent&rsquo;s first draft is a starting point. Edit the file yourself, ask for revisions, or mix both.</p>
+    <pre>Use option A's export flow with option B's privacy checks.
+Leave scheduled exports out of scope and update the recommendation.</pre>
+    <p>The agent rewrites the recommendation and rechecks the tradeoffs for the combined version.</p>
+  </section>
+  <section class="slide">
+    <h1>Build in checkpoints</h1>
+    <ul>
+      <li>After <code>Approved Step 3</code>, the agent creates a feature branch and commits the approved plans.</li>
+      <li>Each stage is verified, recorded in a running summary, and committed with that summary.</li>
+      <li>Scope changes go back to the earliest affected planning step for approval.</li>
+    </ul>
+    <p>A stage commit records evidence. It does not by itself prove deployment or rollback is safe.</p>
+  </section>
+  <section class="slide">
+    <h1>Optional debug mode</h1>
+    <p>Debug mode is feedback for improving Railspike&rsquo;s own instructions, not application debugging. It is off by default.</p>
+    <pre>Enable Railspike debug mode for this workflow.</pre>
+    <p>To default it on for a project, create an empty <code>.railspike_debug_on</code> file at the project root. Only its presence matters.</p>
+  </section>
+  <section class="slide">
+    <h1>Where to go next</h1>
+    <ul>
+      <li><a href="https://railspike.dev/">railspike.dev</a>: the essay and install prompt.</li>
+      <li><a href="https://github.com/rlspk/railspike">github.com/rlspk/railspike</a>: the instructions and README.</li>
+      <li><a href="https://github.com/rlspk/railspike/blob/main/RAILSPIKE.md">RAILSPIKE.md</a>: the full workflow contract.</li>
+    </ul>
+    <p>Print this deck to PDF to share it: one slide per page.</p>
+  </section>
 </main>
 <nav id="nav" aria-label="Slides"><button id="prev" type="button" aria-label="Previous slide">&larr;</button><span id="counter" aria-live="polite"></span><button id="next" type="button" aria-label="Next slide">&rarr;</button></nav>
 <script>
