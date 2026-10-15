@@ -85,36 +85,36 @@ installed WELCOME.md.</pre>
     </ul>
     <p>To be clear: these are instructions the agent follows. They are not a technical lock.</p>
   </section>
-  <!-- Slides 6-10: worked exchange, shaping, stage commits, debug mode, next links -->
+  <!-- Slides 6-9: worked exchange, shaping, checkpoints, debug mode -->
   <section class="slide">
-    <h1>A worked exchange</h1>
-    <p><strong>You:</strong></p>
+    <h1>Say what you want. Read what comes back.</h1>
     <pre>I want to export my saved searches as CSV. Write Step 1 of @railspike.</pre>
-    <p><strong>Agent:</strong> writes <code>docs/plans/&hellip;_step1_solution_assessment.md</code> with a few approaches, then waits.</p>
-    <p><strong>You:</strong> read it, then reply <code>Approved Step 1</code> or ask for changes.</p>
-    <p>For a change with an obvious approach, start at Step 2.</p>
+    <p>The agent writes a file in <code>docs/plans/</code> with a few approaches. Then it waits.</p>
+    <p>You read it. Then reply <code>Approved Step 1</code>, or ask for changes.</p>
+    <p>Obvious approach? Start at Step 2.</p>
   </section>
   <section class="slide">
     <h1>You shape the plan</h1>
-    <p>The agent&rsquo;s first draft is a starting point. Edit the file yourself, ask for revisions, or mix both.</p>
+    <p>The first draft is a starting point. Edit the file. Ask for changes. Or both.</p>
     <pre>Use option A's export flow with option B's privacy checks.
 Leave scheduled exports out of scope and update the recommendation.</pre>
-    <p>The agent rewrites the recommendation and rechecks the tradeoffs for the combined version.</p>
+    <p>The agent rewrites the recommendation and rechecks the tradeoffs.</p>
   </section>
   <section class="slide">
-    <h1>Build in checkpoints</h1>
+    <h1>Every stage is a checkpoint</h1>
     <ul>
-      <li>After <code>Approved Step 3</code>, the agent creates a feature branch and commits the approved plans.</li>
-      <li>Each stage is verified, recorded in a running summary, and committed with that summary.</li>
-      <li>Scope changes go back to the earliest affected planning step for approval.</li>
+      <li>Approve Step 3, and the plans get committed.</li>
+      <li>Each stage is verified and recorded.</li>
+      <li>Each stage is committed with its summary.</li>
+      <li>Scope changes go back for approval.</li>
     </ul>
-    <p>A stage commit records evidence. It does not by itself prove deployment or rollback is safe.</p>
+    <p>A stage commit records evidence. It doesn&rsquo;t prove deployment or rollback is safe.</p>
   </section>
   <section class="slide">
-    <h1>Optional debug mode</h1>
-    <p>Debug mode is feedback for improving Railspike&rsquo;s own instructions, not application debugging. It is off by default.</p>
+    <h1>Debug mode is optional</h1>
+    <p>It&rsquo;s feedback for improving Railspike&rsquo;s own instructions, not application debugging. Off by default.</p>
     <pre>Enable Railspike debug mode for this workflow.</pre>
-    <p>To default it on for a project, create an empty <code>.railspike_debug_on</code> file at the project root. Only its presence matters.</p>
+    <p>Want it on by default? Add an empty <code>.railspike_debug_on</code> file at the project root. Only its presence matters.</p>
   </section>
   <section class="slide">
     <h1>Where to go next</h1>
