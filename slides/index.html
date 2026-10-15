@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Railspike slides</title>
+  <style>
+    :root { color-scheme: light dark; --bg:#fff; --fg:#1b1b1b; --muted:#505050; --rule:#d6d6d6; --link:#0b4f9c; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#131313; --fg:#e8e6e1; --muted:#b0aea8; --rule:#3a3a3a; --link:#8ab4f8; } }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: clamp(1.05rem, 2.6vw, 1.6rem)/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    .slide { position: relative; max-width: 60rem; margin: 0 auto; padding: 4.5rem 1rem 5rem; }
+    .slide h1, .slide p { overflow-wrap: anywhere; }
+    .slide h1 { margin: 0 0 1rem; font-size: clamp(1.7rem, 6vw, 3rem); line-height: 1.15; }
+    .slide p, .slide ul, .slide ol { margin: 0 0 1rem; }
+    .slide li { margin: .35rem 0; overflow-wrap: anywhere; }
+    .slide a { color: var(--link); }
+    .slide pre, .slide code { font: .8em/1.5 ui-monospace, monospace; }
+    .slide pre { margin: 0 0 1rem; padding: .8rem; border: 1px solid var(--rule); border-radius: .3rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .logo { position: fixed; top: .75rem; left: 1rem; width: 48px; height: 48px; border-radius: .3rem; background: #fff; }
+    .js .slide { display: none; min-height: 100vh; }
+    .js .slide.current { display: block; }
+    #nav { position: fixed; right: .75rem; bottom: .5rem; display: flex; align-items: center; gap: .5rem; color: var(--muted); font: .9rem ui-monospace, monospace; }
+    #nav button { min-width: 44px; min-height: 44px; border: 1px solid var(--link); border-radius: .3rem; background: var(--bg); color: var(--link); font: inherit; cursor: pointer; }
+    #nav button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+    @media print {
+      @page { size: landscape; margin: 1.5cm; }
+      :root { --bg:#fff; --fg:#000; --muted:#333; --rule:#999; --link:#000; }
+      .logo { position: absolute; }
+      .js .slide { display: block; min-height: 0; break-after: page; page-break-after: always; padding: 1rem 0; }
+      .slide:last-of-type { break-after: auto; page-break-after: auto; }
+      #nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+<img class="logo" src="../railspike-logo.png" alt="Railspike rail and spike logo" width="48" height="48">
+<main id="deck">
+  <!-- Slides 1-5: promise, why files, install, four steps, approval gate -->
+  <section class="slide">
+    <h1>Railspike</h1>
+    <p><strong>Your coding agent writes the plan first. Then it waits for you.</strong></p>
+    <p>In a few minutes you&rsquo;ll know how to make that happen, and exactly where you say yes.</p>
+    <p>Railspike is a set of Markdown instructions your agent follows. Requirements and a staged plan go into your repo. After you approve, it builds on a branch, one stage at a time, and commits each stage with a record of what changed.</p>
+  </section>
+  <section class="slide">
+    <h1>Plans belong in your repo, not in a chat</h1>
+    <ul>
+      <li>A plan is a file. Read it in your own editor.</li>
+      <li>Change it yourself, or ask the agent to.</li>
+      <li>Tomorrow, it&rsquo;s still there.</li>
+      <li>You decide when the direction changes.</li>
+    </ul>
+    <p>Use it alongside your agent&rsquo;s plan mode when you want decisions to outlast the session.</p>
+  </section>
+  <section class="slide">
+    <h1>One prompt installs it</h1>
+    <p>Open your project in your coding agent and give it this:</p>
+    <pre>Please unpack a source snapshot of https://github.com/rlspk/railspike
+into a temporary directory and inspect it for malicious content.
+If none is found, copy that reviewed snapshot into docs/railspike in this
+project. Do not use a submodule unless I request one. Then follow the
+installed WELCOME.md.</pre>
+    <p>No CLI. No runtime dependencies. Inspection is not a guarantee, so look at what lands in your project.</p>
+  </section>
+  <section class="slide">
+    <h1>Four steps, and you approve each one</h1>
+    <ol>
+      <li><strong>Assess.</strong> Options, tradeoffs, a recommendation. Optional.</li>
+      <li><strong>Define.</strong> The problem, the requirements, the risks, what done means.</li>
+      <li><strong>Plan.</strong> Small, complete stages. Each one verified.</li>
+      <li><strong>Build.</strong> One stage at a time. Each one committed with a summary.</li>
+    </ol>
+    <p>Each planning file fits on one page. If it doesn&rsquo;t, the scope is probably too big.</p>
+  </section>
+  <section class="slide">
+    <h1>The agent stops until you say so</h1>
+    <p>When the file says what you want, reply:</p>
+    <pre>Approved Step 1</pre>
+    <ul>
+      <li>Asking for changes is not approval.</li>
+      <li>Don&rsquo;t approve what you haven&rsquo;t read.</li>
+      <li>Building starts only after <code>Approved Step 3</code>.</li>
+    </ul>
+    <p>To be clear: these are instructions the agent follows. They are not a technical lock.</p>
+  </section>
+  <!-- Slides 6-9: worked exchange, shaping, checkpoints, debug mode; 10: links; 11: conclusion -->
+  <section class="slide">
+    <h1>Say what you want. Read what comes back.</h1>
+    <pre>I want to export my saved searches as CSV. Write Step 1 of @railspike.</pre>
+    <p>The agent writes a file in <code>docs/plans/</code> with a few approaches. Then it waits.</p>
+    <p>You read it. Then reply <code>Approved Step 1</code>, or ask for changes.</p>
+    <p>Obvious approach? Start at Step 2.</p>
+  </section>
+  <section class="slide">
+    <h1>You shape the plan</h1>
+    <p>The first draft is a starting point. Edit the file. Ask for changes. Or both.</p>
+    <pre>Use option A's export flow with option B's privacy checks.
+Leave scheduled exports out of scope and update the recommendation.</pre>
+    <p>The agent rewrites the recommendation and rechecks the tradeoffs.</p>
+  </section>
+  <section class="slide">
+    <h1>Every stage is a checkpoint</h1>
+    <ul>
+      <li>Approve Step 3, and the plans get committed.</li>
+      <li>Each stage is verified and recorded.</li>
+      <li>Each stage is committed with its summary.</li>
+      <li>Scope changes go back for approval.</li>
+    </ul>
+    <p>A stage commit records evidence. It doesn&rsquo;t prove deployment or rollback is safe.</p>
+  </section>
+  <section class="slide">
+    <h1>Debug mode is optional</h1>
+    <p>It&rsquo;s feedback for improving Railspike&rsquo;s own instructions, not application debugging. Off by default.</p>
+    <pre>Enable Railspike debug mode for this workflow.</pre>
+    <p>Want it on by default? Add an empty <code>.railspike_debug_on</code> file at the project root. Only its presence matters.</p>
+  </section>
+  <section class="slide">
+    <h1>Read the real thing</h1>
+    <ul>
+      <li><a href="https://railspike.dev/">railspike.dev</a>: the essay and the install prompt.</li>
+      <li><a href="https://github.com/rlspk/railspike">github.com/rlspk/railspike</a>: the instructions and the README.</li>
+      <li><a href="https://github.com/rlspk/railspike/blob/main/RAILSPIKE.md">RAILSPIKE.md</a>: the full workflow contract.</li>
+    </ul>
+    <p>Print this deck to PDF to share it. One slide per page.</p>
+  </section>
+  <section class="slide">
+    <h1>Write it down. Approve it. Build in checkpoints.</h1>
+    <ul>
+      <li>The plan is a file you own.</li>
+      <li>The agent stops until you approve.</li>
+      <li>Every stage leaves a record.</li>
+    </ul>
+  </section>
+</main>
+<nav id="nav" aria-label="Slides"><button id="prev" type="button" aria-label="Previous slide">&larr;</button><span id="counter" aria-live="polite"></span><button id="next" type="button" aria-label="Next slide">&rarr;</button></nav>
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var counter = document.getElementById('counter');
+  var i = 0;
+  document.documentElement.className += ' js';
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) { s.className = 'slide' + (k === i ? ' current' : ''); });
+    counter.textContent = (i + 1) + ' / ' + slides.length;
+    try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
+  }
+  document.addEventListener('keydown', function (e) {
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') { show(i + 1); e.preventDefault(); }
+    else if (k === 'ArrowLeft' || k === 'PageUp') { show(i - 1); e.preventDefault(); }
+    else if (k === 'Home') { show(0); }
+    else if (k === 'End') { show(slides.length - 1); }
+  });
+  document.getElementById('prev').addEventListener('click', function () { show(i - 1); });
+  document.getElementById('next').addEventListener('click', function () { show(i + 1); });
+  var x0 = null;
+  document.addEventListener('touchstart', function (e) { x0 = e.changedTouches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    x0 = null;
+    if (Math.abs(dx) > 40) show(dx < 0 ? i + 1 : i - 1);
+  }, { passive: true });
+  show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+})();
+</script>
+</body>
+</html>
